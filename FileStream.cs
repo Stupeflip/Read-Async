@@ -8,7 +8,7 @@ using System.IO;
 public class Read
 {
      public static async Task<IEnumerable<string>> LoadAsListAsync(string path)
-        {
+     {
             byte[] res;
 
             try
@@ -24,6 +24,6 @@ public class Read
             }
 
             catch { return null; }
-        }
+      }
 
 }
