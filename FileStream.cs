@@ -18,6 +18,8 @@ public class Read
             res = new byte[fs.Length];
 
             await fs.ReadAsync(res.AsMemory(0, (int)fs.Length));
+            
+            return Encoding.UTF8.GetString(res).Spli(' ');
         }
         catch { return null; }
     }
