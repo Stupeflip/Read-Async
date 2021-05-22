@@ -7,20 +7,23 @@ using System.IO;
 
 public class Read
 {
-    public static async Task<object> LoadAsync(string path)
-    {
-        byte[] res;
-
-        try
+     public static async Task<IEnumerable<string>> LoadAsListAsync(string path)
         {
-            using FileStream fs = File.Open(path, FileMode.Open);
+            byte[] res;
 
-            res = new byte[fs.Length];
+            try
+            {
+                using FileStream fs = File.Open(path, FileMode.Open);
 
-            await fs.ReadAsync(res.AsMemory(0, (int)fs.Length));
-            
-            return Encoding.UTF8.GetString(res).Spli(' ');
+                res = new byte[fs.Length];
+
+                await fs.ReadAsync(res.AsMemory(0, (int)fs.Length));
+
+                return Encoding.UTF8.GetString(res).Split(' ', 
+                    StringSplitOptions.RemoveEmptyEntries);
+            }
+
+            catch { return null; }
         }
-        catch { return null; }
-    }
+
 }
