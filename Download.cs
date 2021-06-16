@@ -8,7 +8,7 @@ class Download
 {
     public static HttpClient Client { get; set; }
 
-    public async Task<bool> DownloadFileAsync(Uri u, string fn, string dts)
+    public async Task DownloadFileAsync(Uri u, string fn, string dts)
     {
         try
         {
@@ -28,22 +28,9 @@ class Download
 
                 var i = System.Drawing.Image.FromStream(ms);
 
-                switch (e)
-                {
-                    case "gif":
-                        i.Save($"{ip}\\{fn}{e}", System.Drawing.Imaging.ImageFormat.Gif);
-                        break;
-                    case "png":
-                        i.Save($"{ip}\\{fn}{e}", System.Drawing.Imaging.ImageFormat.Png);
-                        break;
-                    case "jpg":
-                        i.Save($"{ip}\\{fn}{e}", System.Drawing.Imaging.ImageFormat.Jpeg);
-                        break;
-                    default:
-                        return false;
-                }
-
-                return true;
+                i.Save($"{ip}\\{fn}{e}", e = "gif" ? System.Drawing.Imaging.ImageFormat.Gif : e = "png" ? System.Drawing.Imaging.ImageFormat.Gif : e = "jpg" ? System.Drawing.Imaging.ImageFormat.jpg);
+               
+                return;
             }
         }
         catch (Exception ex)
